@@ -1,0 +1,125 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  title "Escenario Simple – Proyecto Final ICI4150"
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position 0 0 2.5
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.05
+  floorSize 1 1
+  floorTileSize 0.1 0.1
+  wallHeight 0.1
+}
+
+# ── Robot E-puck ──────────────────────────────────────────────────────────
+# Posición inicial: celda (9,0) → world (-0.45, -0.45)
+E-puck {
+  translation -0.45 -0.45 0
+  rotation 0 0 1 0.785398
+  controller "labone"
+}
+
+# ── Meta visual (cilindro verde) ─────────────────────────────────────────
+# celda (0,9) → world (0.45, 0.45)
+Solid {
+  translation 0.45 0.45 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.0 0.9 0.0
+          emissiveColor 0.0 0.4 0.0
+        }
+      }
+      geometry Cylinder {
+        radius 0.04
+        height 0.05
+      }
+    }
+  ]
+  name "meta"
+}
+
+# ── Obstáculo 1: bloque superior-izquierdo ───────────────────────────────
+# celdas rows[2:3] cols[2:4] → translation -0.15 0.2 0  size 0.3 0.2 0.1
+Solid {
+  translation -0.15 0.2 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.3 0.2 0.1
+      }
+    }
+  ]
+  name "obstaculo_1"
+  boundingObject Box {
+    size 0.3 0.2 0.1
+  }
+  physics Physics {
+  }
+}
+
+# ── Obstáculo 2: bloque central-derecho ──────────────────────────────────
+# celdas rows[5:6] cols[5:7] → translation 0.15 -0.1 0  size 0.3 0.2 0.1
+Solid {
+  translation 0.15 -0.1 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.3 0.8
+        }
+      }
+      geometry Box {
+        size 0.3 0.2 0.1
+      }
+    }
+  ]
+  name "obstaculo_2"
+  boundingObject Box {
+    size 0.3 0.2 0.1
+  }
+  physics Physics {
+  }
+}
+
+# ── Obstáculo 3: bloque inferior-izquierdo ───────────────────────────────
+# celdas rows[8:9] cols[2:4] → translation -0.15 -0.4 0  size 0.3 0.2 0.1
+Solid {
+  translation -0.15 -0.4 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.5 0.1 0.7
+        }
+      }
+      geometry Box {
+        size 0.3 0.2 0.1
+      }
+    }
+  ]
+  name "obstaculo_3"
+  boundingObject Box {
+    size 0.3 0.2 0.1
+  }
+  physics Physics {
+  }
+}

@@ -1,0 +1,698 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  title "Escenario Complejo – Proyecto Final ICI4150"
+}
+Viewpoint {
+  orientation 0.28169658718586804 0.896021428314427 -0.3432093133485875 1.4831795734798847
+  position -0.6016718545240113 -0.22602884606354978 1.397856207513939
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.05
+  floorSize 1.2 1.2
+  floorTileSize 0.1 0.1
+  wallHeight 0.12
+}
+E-puck {
+  translation -0.556065 -0.287367 -0.05
+  rotation 0 0 1 0.785398
+  controller "labone"
+}
+Solid {
+  translation 0.35 0.35 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0 0.9 0
+          emissiveColor 0 0.4 0
+        }
+      }
+      geometry Cylinder {
+        height 0.05
+        radius 0.04
+      }
+    }
+  ]
+  name "meta"
+}
+Solid {
+  translation 0 0.45 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_00"
+  boundingObject Box {
+    size 1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.45 0.35 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.3 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_01"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 0.35 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.5 0.1 0.7
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_02"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.45 0.25 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.7 0.3
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_03"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.05 0.25 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.7 0.6 0.1
+        }
+      }
+      geometry Box {
+        size 0.5 0.1 0.12
+      }
+    }
+  ]
+  name "pared_04"
+  boundingObject Box {
+    size 0.5 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 0.25 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.3 0.6 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_05"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.45 0.15 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_06"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.25 0.15 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.3 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_07"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.15 0.15 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.5 0.1 0.7
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_08"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.4 0.15 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.7 0.3
+        }
+      }
+      geometry Box {
+        size 0.2 0.1 0.12
+      }
+    }
+  ]
+  name "pared_09"
+  boundingObject Box {
+    size 0.2 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.45 0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.7 0.6 0.1
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_10"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.25 0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.3 0.6 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_11"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.05 0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_12"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.15 0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.3 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_13"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.5 0.1 0.7
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_14"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.45 -0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.7 0.3
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_15"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.05 -0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.7 0.6 0.1
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_16"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 -0.05 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.3 0.6 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_17"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.35 -0.15 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.3 0.1 0.12
+      }
+    }
+  ]
+  name "pared_18"
+  boundingObject Box {
+    size 0.3 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.1 -0.15 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.3 0.8
+        }
+      }
+      geometry Box {
+        size 0.4 0.1 0.12
+      }
+    }
+  ]
+  name "pared_19"
+  boundingObject Box {
+    size 0.4 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 -0.15 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.5 0.1 0.7
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_20"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.25 -0.25 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.7 0.3
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_21"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.25 -0.25 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.7 0.6 0.1
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_22"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 -0.25 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.3 0.6 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_23"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.45 -0.35 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_24"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.1 -0.35 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.3 0.8
+        }
+      }
+      geometry Box {
+        size 0.4 0.1 0.12
+      }
+    }
+  ]
+  name "pared_25"
+  boundingObject Box {
+    size 0.4 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.25 -0.35 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.5 0.1 0.7
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_26"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 -0.35 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1 0.7 0.3
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_27"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.45 -0.45 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.7 0.6 0.1
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_28"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.45 -0.45 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.3 0.6 0.8
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_29"
+  boundingObject Box {
+    size 0.1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
+Solid {
+  translation 0 -0.55 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 1 0.1 0.12
+      }
+    }
+  ]
+  name "pared_30"
+  boundingObject Box {
+    size 1 0.1 0.12
+  }
+  physics Physics {
+  }
+}
