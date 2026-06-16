@@ -1,0 +1,416 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5762025981776118 0.5838807784130009 0.57190366536087 2.1106770747488284
+  position 0.02312869621624476 0.12367097195893868 2.5335202616765797
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+E-puck {
+  translation -0.505628 -0.505496 -0.05
+  rotation 0 0 1 0.785
+  controller "labone"
+}
+RectangleArena {
+  translation 0 0 -0.05
+  floorSize 1.2 1.2
+}
+Solid {
+  translation 0.02 -0.09 0
+  children [
+    DEF bloque_central Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.2 0.2
+        }
+      }
+      geometry Box {
+        size 0.12 0.12 0.12
+      }
+    }
+  ]
+  name "bloque_central"
+  boundingObject USE bloque_central
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.04 0.12 0
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    DEF pared_sup_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2 0.4 0.8
+        }
+      }
+      geometry Box {
+        size 0.3 0.07 0.1
+      }
+    }
+  ]
+  name "pared_sup_izq"
+  boundingObject USE pared_sup_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.02 0.29 0
+  rotation 0 0 1 1.01503e-06
+  children [
+    DEF pared_sup_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2 0.4 0.8
+        }
+      }
+      geometry Box {
+        size 0.4 0.03 0.1
+      }
+    }
+  ]
+  name "pared_sup_izq(2)"
+  boundingObject USE pared_sup_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.26 0.43 0
+  rotation 0 0 1 1.5708
+  children [
+    DEF pared_sup_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2 0.4 0.8
+        }
+      }
+      geometry Box {
+        size 0.3 0.07 0.1
+      }
+    }
+  ]
+  name "pared_sup_izq(4)"
+  boundingObject USE pared_sup_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.01 0.47 0
+  rotation 0 0 1 1.01503e-06
+  children [
+    DEF pared_sup_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2 0.4 0.8
+        }
+      }
+      geometry Box {
+        size 0.3 0.07 0.1
+      }
+    }
+  ]
+  name "pared_sup_izq(3)"
+  boundingObject USE pared_sup_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.32 0.12 0
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    DEF pared_sup_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2 0.4 0.8
+        }
+      }
+      geometry Box {
+        size 0.3 0.07 0.1
+      }
+    }
+  ]
+  name "pared_sup_izq(1)"
+  boundingObject USE pared_sup_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.32 -0.21 0
+  rotation 0 0 1 1.5708
+  children [
+    DEF pared_sup_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2 0.4 0.8
+        }
+      }
+      geometry Box {
+        size 0.25 0.07 0.1
+      }
+    }
+  ]
+  name "pared_sup_der"
+  boundingObject USE pared_sup_der
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.413136 -0.25213 0
+  rotation 0 0 1 -0.785395307179586
+  children [
+    DEF pared_vert_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.6 0.1
+        }
+      }
+      geometry Box {
+        size 0.07 0.35 0.1
+      }
+    }
+  ]
+  name "pared_vert_izq"
+  boundingObject USE pared_vert_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.264645 -0.414763 0
+  rotation 0 0 1 -0.785395307179586
+  children [
+    DEF pared_vert_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.6 0.1
+        }
+      }
+      geometry Box {
+        size 0.07 0.35 0.1
+      }
+    }
+  ]
+  name "pared_vert_izq(1)"
+  boundingObject USE pared_vert_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.13 -0.28 0
+  children [
+    DEF caja_esq_sup_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.5 0.8 0.2
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "caja_esq_sup_der"
+  boundingObject USE caja_esq_sup_der
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.23 -0.28 0
+  children [
+    DEF caja_inf_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.7 0.2 0.7
+        }
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "caja_inf_der"
+  boundingObject USE caja_inf_der
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.150065 -0.1201 0
+  rotation 0 0 -1 -0.0004053071795864227
+  children [
+    DEF pared_diagonal Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.9 0.5 0.1
+        }
+      }
+      geometry Box {
+        size 0.22 0.06 0.1
+      }
+    }
+  ]
+  name "pared_diagonal"
+  boundingObject USE pared_diagonal
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.0300047 -0.270052 0
+  rotation 0 0 -1 -0.0004053071795864227
+  children [
+    DEF pared_diagonal Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.9 0.5 0.1
+        }
+      }
+      geometry Box {
+        size 0.22 0.06 0.1
+      }
+    }
+  ]
+  name "pared_diagonal(1)"
+  boundingObject USE pared_diagonal
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.3 -0.06 0
+  children [
+    DEF caja_esq_sup_izq Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.3 0.7 0.7
+        }
+      }
+      geometry Box {
+        size 0.1 0.05 0.1
+      }
+    }
+  ]
+  name "caja_esq_sup_izq"
+  boundingObject USE caja_esq_sup_izq
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.33 0.31 0
+  children [
+    DEF pilar_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.6 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.06 0.06 0.12
+      }
+    }
+  ]
+  name "pilar_der"
+  boundingObject USE pilar_der
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.33 0.38 0
+  children [
+    DEF pilar_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.6 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.06 0.06 0.12
+      }
+    }
+  ]
+  name "pilar_der(1)"
+  boundingObject USE pilar_der
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.33 0.45 0
+  children [
+    DEF pilar_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.6 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.06 0.06 0.12
+      }
+    }
+  ]
+  name "pilar_der(2)"
+  boundingObject USE pilar_der
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.26 0.47 0
+  children [
+    DEF pilar_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.6 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.06 0.06 0.12
+      }
+    }
+  ]
+  name "pilar_der(3)"
+  boundingObject USE pilar_der
+  physics Physics {
+  }
+}
+Solid {
+  translation 0.19 0.47 0
+  children [
+    DEF pilar_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.6 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.06 0.06 0.12
+      }
+    }
+  ]
+  name "pilar_der(4)"
+  boundingObject USE pilar_der
+  physics Physics {
+  }
+}
+Solid {
+  translation -0.1 0.54 0
+  children [
+    DEF pilar_der Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.6 0.3 0.1
+        }
+      }
+      geometry Box {
+        size 0.06 0.06 0.12
+      }
+    }
+  ]
+  name "pilar_der(5)"
+  boundingObject USE pilar_der
+  physics Physics {
+  }
+}
