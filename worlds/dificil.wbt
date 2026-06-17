@@ -18,7 +18,7 @@ TexturedBackgroundLight {
 E-puck {
   translation -0.505628 -0.505496 -0.05
   rotation 0 0 1 0.785
-  controller "labone"
+  controller "navegacion"
 }
 RectangleArena {
   translation 0 0 -0.05

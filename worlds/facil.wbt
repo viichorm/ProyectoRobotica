@@ -83,7 +83,7 @@ Solid {
   ]
   name "solid(2)"
   boundingObject Box {
-    size 0.1 0.1 0.1
+    size 0.4 0.1 0.1
   }
 }
 Solid {
@@ -100,7 +100,7 @@ Solid {
   ]
   name "solid(4)"
   boundingObject Box {
-    size 0.1 0.1 0.1
+    size 0.3 0.1 0.1
   }
 }
 Solid {
@@ -117,7 +117,7 @@ Solid {
   ]
   name "solid(9)"
   boundingObject Box {
-    size 0.1 0.1 0.1
+    size 0.3 0.1 0.1
   }
 }
 Solid {
@@ -134,7 +134,7 @@ Solid {
   ]
   name "solid(5)"
   boundingObject Box {
-    size 0.1 0.1 0.1
+    size 0.3 0.1 0.1
   }
 }
 Solid {
@@ -202,6 +202,6 @@ Solid {
   ]
   name "solid(3)"
   boundingObject Box {
-    size 0.1 0.1 0.1
+    size 0.4 0.1 0.1
   }
 }

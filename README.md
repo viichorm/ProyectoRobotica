@@ -18,11 +18,11 @@ Lenguaje: Python · Simulador: Webots · Robot: e-puck
 - [x] Calibración de umbral de sensores (threshold = 80)
 
 ### Persona 2 — Algoritmia y navegación global
-- [ ] Grilla de ocupación 2D — escenario simple (`grid_simple.py`)
-- [ ] Grilla de ocupación 2D — escenario complejo (`grid_complejo.py`)
-- [ ] Algoritmo A* (`plan_path`)
-- [ ] Conversión ruta → waypoints reales (`cells_to_world`)
-- [ ] Filtrado de sensores (`filtros.py`)
+- [x] Grilla de ocupación 2D — escenario simple (`grid_simple.py`)
+- [x] Grilla de ocupación 2D — escenario complejo (`grid_complejo.py`)
+- [x] Algoritmo A* (`plan_path`)
+- [x] Conversión ruta → waypoints reales (`cells_to_world`)
+- [x] Filtrado de sensores (`filtros.py`)
 
 ### Persona 3 — Integración, análisis y documentación
 - [ ] Loop principal con navegación hacia waypoints (`navegacion.py`)
