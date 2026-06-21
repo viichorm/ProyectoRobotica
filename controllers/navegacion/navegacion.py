@@ -1,25 +1,11 @@
 """
-Controlador principal para el mundo 'facil' en Webots.
-Nombre del controlador: navegacion  (debe coincidir con el campo
-controller del nodo E-puck en el archivo .wbt)
-
-Arquitectura:
-    sensores PS  ->  filtrado (media movil + Kalman 1D)
-                 ->  odometria diferencial  (corregida por Supervisor)
-                 ->  OccupancyGrid (14x14, 0.2 m/celda)
-                 ->  A* (4 direcciones, heuristica Manhattan)
-                 ->  WaypointFollower (control proporcional)
-                 ->  NavegacionReactiva (capa de seguridad con prioridad)
-                 ->  recuperacion ante bloqueo
-                 ->  MetricsLogger (CSV por ciclo)
-
-Flujo de ejecucion:
-    __init__  : inicializa hardware, carga grilla, planifica ruta, imprime encabezado.
-    ejecutar  : bucle Webots de 64 ms; al terminar guarda el CSV.
+Controlador principal para navegacion en Webots.
+Nombre del controlador: navegacion
 """
 
 import math
 import os
+import sys
 
 from controller import Supervisor
 
@@ -32,11 +18,9 @@ from config import (
     ACCIONES,
     BLOQUEO_AVANCE_MIN,
     BLOQUEO_CICLOS,
-    CSV_GRILLA,
     ESCALA_SENSOR,
     FS,
     MODO_DECISION,
-    MOVIMIENTO_ASTAR,
     ORIGEN_WEBOTS,
     Q_KALMAN,
     R_KALMAN,
@@ -70,20 +54,7 @@ from sensors import (
 from waypoint_follower import WaypointFollower
 
 
-# ---------------------------------------------------------------------------
-# Controlador
-# ---------------------------------------------------------------------------
-
-class ControladorFacil:
-    """
-    Controlador autonomo de navegacion para el mundo 'facil'.
-
-    Puede elegirse el modo de decision en config.py:
-        "crudo"    -> sensor frontal sin filtrar
-        "filtrado" -> media movil
-        "kalman"   -> fusion Kalman (recomendado)
-    """
-
+class ControladorNavegacion:
     _MODOS_VALIDOS = {
         "raw":      "crudo",
         "crudo":    "crudo",
@@ -92,52 +63,43 @@ class ControladorFacil:
         "kalman":   "kalman",
     }
 
-    # ------------------------------------------------------------------
-    # Inicializacion
-    # ------------------------------------------------------------------
-
-    def __init__(self):
+    def __init__(self, archivo_grilla="facil_grid.csv", tipo_movimiento="4", 
+                 tamano_celda=TAMANO_CELDA, origen_webots=ORIGEN_WEBOTS):
         self.robot = Supervisor()
+        
+        self.archivo_grilla = archivo_grilla
+        self.tipo_movimiento = tipo_movimiento
+        self.tamano_celda = tamano_celda
+        self.origen_webots = origen_webots
 
-        # Hardware
         self.motor_izq, self.motor_der = inicializar_motores(self.robot)
         self.enc_izq,   self.enc_der   = inicializar_encoders(self.robot)
         self.sensores_ps               = inicializar_sensores_proximidad(self.robot)
 
-        # Filtros y estimacion
         self.filtro_media  = FiltroMediaMovil(VENTANA_MEDIA_MOVIL)
         self.filtro_kalman = FiltroKalman1D(Q_KALMAN, R_KALMAN)
         self.odometria     = OdometriaDiferencial()
 
-        # Navegacion
         self.navegacion = NavegacionReactiva()
         self.logger     = MetricsLogger()
 
-        # Estado
         self.muestra    = 0
         self.modo       = self._leer_modo()
 
-        # Planificacion global
         self.grid      = None
         self.ruta      = []
         self.waypoints = []
         self.seguidor  = None
 
-        # Recuperacion ante bloqueo
         self.bloqueo_contador      = 0
         self.recuperacion_retroceso= 0
         self.recuperacion_giro     = 0
 
-        # Pose del supervisor
         self.usando_supervisor     = False
         self.ultima_pose_supervisor= None
 
         self._inicializar_navegacion()
         self._imprimir_encabezado()
-
-    # ------------------------------------------------------------------
-    # Configuracion del modo de decision
-    # ------------------------------------------------------------------
 
     def _leer_modo(self) -> str:
         clave = MODO_DECISION.strip().lower()
@@ -146,16 +108,10 @@ class ControladorFacil:
             return "kalman"
         return self._MODOS_VALIDOS[clave]
 
-    # ------------------------------------------------------------------
-    # Lectura de pose via Supervisor
-    # ------------------------------------------------------------------
-
     def _yaw_desde_orientacion(self, ori) -> float:
-        """Extrae el angulo yaw de la matriz de orientacion 3x3 de Webots."""
         return math.atan2(ori[3], ori[0])
 
     def _leer_pose_supervisor(self):
-        """Devuelve (x, y, theta) desde el Supervisor, o None si falla."""
         try:
             nodo     = self.robot.getSelf()
             pos      = nodo.getPosition()
@@ -166,12 +122,6 @@ class ControladorFacil:
             return None
 
     def _sincronizar_supervisor(self):
-        """
-        Actualiza la odometria con la pose real del robot.
-
-        Returns:
-            Avance real [m] respecto al ciclo anterior (None si falla).
-        """
         pose = self._leer_pose_supervisor()
         if pose is None:
             return None
@@ -187,15 +137,7 @@ class ControladorFacil:
         self.odometria.establecer_pose(*pose)
         return avance
 
-    # ------------------------------------------------------------------
-    # Celda libre mas cercana (BFS)
-    # ------------------------------------------------------------------
-
     def _celda_libre_cercana(self, x: float, y: float):
-        """
-        Retorna la celda libre mas cercana a (x, y) usando BFS.
-        Util cuando el robot se ubica sobre (o muy cerca de) un obstaculo.
-        """
         celda_ini = self.grid.mundo_a_celda(x, y)
 
         if self.grid.es_libre(celda_ini):
@@ -222,27 +164,19 @@ class ControladorFacil:
         print("[ADVERTENCIA] No se encontro celda libre cercana. Usando inicio del CSV.")
         return self.grid.inicio
 
-    # ------------------------------------------------------------------
-    # Inicializacion de la navegacion global
-    # ------------------------------------------------------------------
-
     def _inicializar_navegacion(self) -> None:
-        """Carga la grilla, lee la pose real y ejecuta A*."""
-        # Ruta al CSV: junto a este archivo .py
         dir_controlador = os.path.dirname(os.path.abspath(__file__))
-        ruta_csv = os.path.join(dir_controlador, CSV_GRILLA)
+        ruta_csv = os.path.join(dir_controlador, self.archivo_grilla)
 
         try:
             self.grid = OccupancyGrid(
                 ruta_csv,
-                tamano_celda=TAMANO_CELDA,
-                origen_webots=ORIGEN_WEBOTS,
+                tamano_celda=self.tamano_celda,
+                origen_webots=self.origen_webots,
             )
 
-            # Leer pose REAL antes de planificar
             pose = self._leer_pose_supervisor()
             if pose is None:
-                # Fallback: usar centro de la celda marcada como inicio en el CSV
                 x_ini, y_ini = self.grid.celda_a_mundo(self.grid.inicio)
                 pose = (x_ini, y_ini, THETA_INICIAL)
                 celda_inicio = self.grid.inicio
@@ -253,12 +187,11 @@ class ControladorFacil:
 
             self.odometria.establecer_pose(*pose)
 
-            # A*
             self.ruta = astar(
                 self.grid,
                 celda_inicio,
                 self.grid.meta,
-                tipo_movimiento=MOVIMIENTO_ASTAR,
+                tipo_movimiento=self.tipo_movimiento,
             )
 
             if not self.ruta:
@@ -274,13 +207,9 @@ class ControladorFacil:
             self.grid = self.ruta = self.waypoints = None
             self.seguidor = None
 
-    # ------------------------------------------------------------------
-    # Impresion del encabezado
-    # ------------------------------------------------------------------
-
     def _imprimir_encabezado(self) -> None:
         separador()
-        print(negrita(" CONTROLADOR NAVEGACION - MUNDO FACIL"))
+        print(negrita(f" CONTROLADOR NAVEGACION - Archivo: {self.archivo_grilla}"))
         separador()
         print(f" Modo de decision      : {self.modo}")
         print(f" Tiempo de muestreo Ts : {TS:.3f} s  ({FS:.2f} Hz)")
@@ -288,42 +217,33 @@ class ControladorFacil:
         print(f" Umbral lateral        : {UMBRAL_LATERAL}")
         print(f" Media movil           : ventana = {VENTANA_MEDIA_MOVIL}")
         print(f" Kalman                : Q={Q_KALMAN}, R={R_KALMAN}")
-        print(f" Acciones disponibles  : {len(ACCIONES)}")
+        print(f" Movimiento A* : {self.tipo_movimiento} direcciones")
 
         if self.grid is not None and self.ruta:
             print(f" Grilla                : {self.grid.filas}x{self.grid.columnas} "
-                  f"({TAMANO_CELDA} m/celda)")
+                  f"({self.tamano_celda} m/celda)")
             print(f" Pose fuente           : "
                   f"{'Supervisor Webots' if self.usando_supervisor else 'odometria encoders'}")
             print(f" Inicio grilla         : {self.grid.inicio}")
             print(f" Meta grilla           : {self.grid.meta}")
-            print(f" Celdas ruta A*        : {len(self.ruta)}")
+            print(f" Celdas ruta A* : {len(self.ruta)}")
             print(f" Waypoints             : {len(self.waypoints)}")
             longitud = self.grid.calcular_longitud_ruta(self.ruta)
             print(f" Longitud estimada     : {longitud:.2f} m")
         else:
-            print(" Planificador A*       : desactivado (solo reactivo)")
+            print(" Planificador A* : desactivado (solo reactivo)")
 
         separador()
         print(negrita(" INICIANDO EJECUCION AUTONOMA"))
         separador()
         print()
 
-    # ------------------------------------------------------------------
-    # Seleccion del valor de decision
-    # ------------------------------------------------------------------
-
-    def _valor_decision(self, crudo: float,
-                        filtrado: float, kalman: float) -> float:
+    def _valor_decision(self, crudo: float, filtrado: float, kalman: float) -> float:
         if self.modo == "crudo":
             return crudo
         if self.modo == "filtrado":
             return filtrado
         return kalman
-
-    # ------------------------------------------------------------------
-    # Distancia al waypoint activo
-    # ------------------------------------------------------------------
 
     def _dist_waypoint_actual(self) -> float | None:
         if self.seguidor is None or self.seguidor.terminado():
@@ -332,10 +252,6 @@ class ControladorFacil:
         dx = ox - self.odometria.x
         dy = oy - self.odometria.y
         return math.sqrt(dx * dx + dy * dy)
-
-    # ------------------------------------------------------------------
-    # Recuperacion ante bloqueo
-    # ------------------------------------------------------------------
 
     def _recuperacion_activa(self) -> bool:
         return self.recuperacion_retroceso > 0 or self.recuperacion_giro > 0
@@ -347,7 +263,6 @@ class ControladorFacil:
         print("[RECUPERACION] Robot bloqueado. Iniciando maniobra de recuperacion.")
 
     def _ejecutar_recuperacion(self):
-        """Devuelve (vel_izq, vel_der, accion) si hay recuperacion activa, o None."""
         if self.recuperacion_retroceso > 0:
             self.recuperacion_retroceso -= 1
             return (RECUPERACION_VEL_RETROCESO,
@@ -364,8 +279,6 @@ class ControladorFacil:
 
     def _actualizar_bloqueo(self, avance: float, accion: str,
                              vel_izq: float, vel_der: float) -> None:
-        """Detecta si el robot esta bloqueado y activa la recuperacion."""
-        # No contar bloqueo durante giro, meta o recuperacion
         if accion in (ACCION_GIRAR_A_WAYPOINT, ACCION_META_ALCANZADA,
                       ACCION_RECUPERAR_RETROCEDER, ACCION_RECUPERAR_GIRAR):
             self.bloqueo_contador = 0
@@ -381,19 +294,7 @@ class ControladorFacil:
         if self.bloqueo_contador >= BLOQUEO_CICLOS and not self._recuperacion_activa():
             self._iniciar_recuperacion()
 
-    # ------------------------------------------------------------------
-    # Seleccion del movimiento del ciclo
-    # ------------------------------------------------------------------
-
-    def _seleccionar_movimiento(self, valores_ps: list,
-                                valor_decision: float) -> tuple[float, float, str]:
-        """
-        Prioridad:
-            1. Navegacion reactiva (si hay obstaculo).
-            2. Recuperacion ante bloqueo.
-            3. Seguidor de waypoints.
-            4. Reactivo puro (si no hay planificacion).
-        """
+    def _seleccionar_movimiento(self, valores_ps: list, valor_decision: float) -> tuple[float, float, str]:
         if self.navegacion.requiere_intervencion(valores_ps, valor_decision):
             return self.navegacion.decidir_movimiento(valores_ps, valor_decision)
 
@@ -408,94 +309,54 @@ class ControladorFacil:
                 self.odometria.theta,
             )
 
-        # Sin planificador: dejar que la capa reactiva navegue libre
         return self.navegacion.decidir_movimiento(valores_ps, valor_decision)
 
-    # ------------------------------------------------------------------
-    # Impresion de estado periodico
-    # ------------------------------------------------------------------
-
-    def _imprimir_estado(self, tiempo: float,
-                         f_crudo: float, f_filt: float, f_kal: float,
-                         valores_ps: list, v_lin: float, v_ang: float,
-                         dist_wp, accion: str) -> None:
-        print(f"* [{negrita('t')}: {tiempo:.2f}s]  "
-              f"[{negrita('muestra')}: {self.muestra}]")
-        print(f"  {negrita('Frontal')} : "
-              f"raw={f_crudo:.1f}  filt={f_filt:.1f}  kal={f_kal:.1f}  "
-              f"K={self.filtro_kalman.k:.3f}")
-        print(f"  {negrita('Lateral')} : "
-              f"izq={valores_ps[IDX_LATERAL_IZQ]:.1f}  "
-              f"der={valores_ps[IDX_LATERAL_DER]:.1f}")
-        print(f"  {negrita('Odometria')}: "
-              f"x={self.odometria.x:.3f}  "
-              f"y={self.odometria.y:.3f}  "
-              f"th={self.odometria.theta:.3f} rad")
-        print(f"  {negrita('Velocidad')}: "
-              f"v={v_lin:.3f} m/s  w={v_ang:.3f} rad/s")
+    def _imprimir_estado(self, tiempo: float, f_crudo: float, f_filt: float, f_kal: float,
+                         valores_ps: list, v_lin: float, v_ang: float, dist_wp, accion: str) -> None:
+        print(f"* [{negrita('t')}: {tiempo:.2f}s]  [{negrita('muestra')}: {self.muestra}]")
+        print(f"  {negrita('Frontal')} : raw={f_crudo:.1f}  filt={f_filt:.1f}  kal={f_kal:.1f}  K={self.filtro_kalman.k:.3f}")
+        print(f"  {negrita('Lateral')} : izq={valores_ps[IDX_LATERAL_IZQ]:.1f}  der={valores_ps[IDX_LATERAL_DER]:.1f}")
+        print(f"  {negrita('Odometria')}: x={self.odometria.x:.3f}  y={self.odometria.y:.3f}  th={self.odometria.theta:.3f} rad")
+        print(f"  {negrita('Velocidad')}: v={v_lin:.3f} m/s  w={v_ang:.3f} rad/s")
 
         if self.seguidor is not None:
             wp_total = len(self.waypoints)
             wp_idx   = min(self.seguidor.indice, wp_total)
-            print(f"  {negrita('Waypoint')} : "
-                  f"{wp_idx}/{wp_total}  "
-                  f"dist={dist_wp:.3f} m" if dist_wp is not None
-                  else f"  {negrita('Waypoint')} : {wp_idx}/{wp_total}")
+            print(f"  {negrita('Waypoint')} : {wp_idx}/{wp_total}  dist={dist_wp:.3f} m" if dist_wp is not None else f"  {negrita('Waypoint')} : {wp_idx}/{wp_total}")
 
-        print(f"  {negrita('Accion')}   : {negrita(accion)}")
-        print()
-
-    # ------------------------------------------------------------------
-    # Bucle principal de Webots
-    # ------------------------------------------------------------------
+        print(f"  {negrita('Accion')}   : {negrita(accion)}\n")
 
     def ejecutar(self) -> None:
-        """Bucle de control. Llama a robot.step() en cada iteracion."""
         while self.robot.step(TIME_STEP) != -1:
             self.muestra += 1
             tiempo = self.muestra * TS
 
-            # --- 1. Lectura de sensores ----------------------------------
             valores_ps = leer_sensores_proximidad(self.sensores_ps)
             enc_izq_v  = self.enc_izq.getValue()
             enc_der_v  = self.enc_der.getValue()
 
-            # --- 2. Odometria + correccion supervisor --------------------
             ds, v_lin, v_ang = self.odometria.actualizar(enc_izq_v, enc_der_v)
             avance_sup = self._sincronizar_supervisor()
             avance_bloqueo = avance_sup if avance_sup is not None else abs(ds)
 
-            # --- 3. Filtrado de la senal frontal -------------------------
             f_crudo   = obtener_senal_frontal(valores_ps)
             f_filtrado = self.filtro_media.actualizar(f_crudo)
             f_kalman  = self.filtro_kalman.actualizar(ds * ESCALA_SENSOR, f_crudo)
             valor_dec  = self._valor_decision(f_crudo, f_filtrado, f_kalman)
 
-            # --- 4. Seleccion del movimiento -----------------------------
             dist_wp = self._dist_waypoint_actual()
-            vel_izq, vel_der, accion = self._seleccionar_movimiento(
-                valores_ps, valor_dec
-            )
+            vel_izq, vel_der, accion = self._seleccionar_movimiento(valores_ps, valor_dec)
             aplicar_velocidades(self.motor_izq, self.motor_der, vel_izq, vel_der)
 
-            # --- 5. Deteccion de bloqueo ---------------------------------
             self._actualizar_bloqueo(avance_bloqueo, accion, vel_izq, vel_der)
 
-            # --- 6. Celda actual -----------------------------------------
             celda_actual = None
             if self.grid is not None:
-                celda_actual = self.grid.mundo_a_celda(
-                    self.odometria.x, self.odometria.y
-                )
+                celda_actual = self.grid.mundo_a_celda(self.odometria.x, self.odometria.y)
 
-            # --- 7. Log periodico en consola (cada 20 ciclos) -----------
             if self.muestra % 20 == 0:
-                self._imprimir_estado(
-                    tiempo, f_crudo, f_filtrado, f_kalman,
-                    valores_ps, v_lin, v_ang, dist_wp, accion,
-                )
+                self._imprimir_estado(tiempo, f_crudo, f_filtrado, f_kalman, valores_ps, v_lin, v_ang, dist_wp, accion)
 
-            # --- 8. Registro de metricas ---------------------------------
             self.logger.agregar({
                 "t_s":                    round(tiempo, 4),
                 "muestra":                self.muestra,
@@ -531,7 +392,6 @@ class ControladorFacil:
                 "bloqueo_contador":       self.bloqueo_contador,
             })
 
-            # --- 9. Fin al llegar a la meta ------------------------------
             if accion == ACCION_META_ALCANZADA:
                 print()
                 separador()
@@ -546,13 +406,21 @@ class ControladorFacil:
                 separador()
                 break
 
-        # Guardar CSV al terminar (por meta o por fin de simulacion)
         self.logger.guardar_csv(self.robot, self.modo)
 
 
-# ---------------------------------------------------------------------------
-# Punto de entrada
-# ---------------------------------------------------------------------------
-
 if __name__ == "__main__":
-    ControladorFacil().ejecutar()
+    if len(sys.argv) > 1 and sys.argv[1] == "dificil":
+        ControladorNavegacion(
+            archivo_grilla="dificil_grid.csv", 
+            tipo_movimiento="8", 
+            tamano_celda=0.1, 
+            origen_webots=(-1.35, 1.35)
+        ).ejecutar()
+    else:
+        ControladorNavegacion(
+            archivo_grilla="facil_grid.csv", 
+            tipo_movimiento="4", 
+            tamano_celda=TAMANO_CELDA, 
+            origen_webots=ORIGEN_WEBOTS
+        ).ejecutar()
