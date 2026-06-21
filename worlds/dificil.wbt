@@ -10,8 +10,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.5875402064929165 -0.5838570226456306 -0.5602744710065245 4.157628039016141
-  position 0.20440383761854897 0.5042659271259695 8.031899433730848
+  orientation 0.5658644757309242 -0.5701026580131716 -0.5956344134048023 4.222567187977083
+  position 0.05942136882447569 -0.40287895695542403 7.980889082976291
 }
 TexturedBackground {
 }
@@ -150,7 +150,7 @@ Solid {
   }
 }
 Solid {
-  translation -0.54672 -0.1934 0
+  translation -0.54672 -0.1034 0
   rotation 0 0 -1 1.57079
   children [
     Shape {
@@ -167,7 +167,7 @@ Solid {
   }
 }
 Solid {
-  translation -1.09672 -0.433397 0
+  translation -1.09672 -0.353397 0
   rotation 0 0 1 6.32203e-06
   children [
     Shape {
@@ -184,7 +184,7 @@ Solid {
   }
 }
 Solid {
-  translation -0.69672 -0.433393 0
+  translation -0.69672 -0.353393 0
   rotation 0 0 1 6.32203e-06
   children [
     Shape {
@@ -490,7 +490,7 @@ Solid {
   }
 }
 Solid {
-  translation -0.296732 1.14661 0
+  translation -0.316732 1.14661 0
   rotation 0 0 -1 -5.307179586466759e-06
   children [
     Shape {
@@ -541,7 +541,7 @@ Solid {
   }
 }
 Solid {
-  translation -0.696733 1.14661 0
+  translation -0.766733 1.14661 0
   rotation 0 0 1 3.14159
   children [
     Shape {
@@ -558,7 +558,7 @@ Solid {
   }
 }
 Solid {
-  translation -0.946733 0.97661 0
+  translation -1.03673 1.04661 0
   rotation 0 0 -1 -1.5707953071795862
   children [
     Shape {
@@ -575,8 +575,8 @@ Solid {
   }
 }
 Solid {
-  translation -1.19673 0.81661 0
-  rotation 0 0 1 3.14159
+  translation -1.04673 0.64661 0
+  rotation 0 0 1 -1.5707953071795862
   children [
     Shape {
       appearance DamascusSteel {
@@ -609,8 +609,8 @@ Solid {
   }
 }
 Solid {
-  translation -1.18673 0.05661 0
-  rotation 0 0 1 3.14159
+  translation -1.04673 0.24661 0
+  rotation 0 0 1 -1.5707953071795862
   children [
     Shape {
       appearance DamascusSteel {

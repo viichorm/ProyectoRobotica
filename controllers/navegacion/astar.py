@@ -51,6 +51,25 @@ def _es_libre(grilla, celda) -> bool:
     return grilla[r][c] != 1
 
 
+def _diagonal_valida(grilla, actual, dr: int, dc: int) -> bool:
+    """
+    Evita que un movimiento diagonal 'corte' la esquina de un obstaculo.
+
+    Para ir de 'actual' a 'vecino' en diagonal, las dos celdas
+    ortogonales que forman la esquina del cuadrado (actual->vecino)
+    deben estar libres. Si cualquiera de las dos es obstaculo, el
+    robot rozaria esa pared al pasar por el vertice, asi que el
+    movimiento se rechaza.
+    """
+    if dr == 0 or dc == 0:
+        return True  # movimiento cardinal, no aplica
+
+    r0, c0 = actual
+    celda_horizontal = (r0, c0 + dc)
+    celda_vertical = (r0 + dr, c0)
+    return _es_libre(grilla, celda_horizontal) and _es_libre(grilla, celda_vertical)
+
+
 def _reconstruir(came_from: dict, inicio, meta) -> list:
     if meta not in came_from and meta != inicio:
         return []
@@ -113,6 +132,8 @@ def astar(grilla, inicio, meta, tipo_movimiento: str = "4") -> list:
         for dr, dc, coste in movs:
             vecino = (actual[0] + dr, actual[1] + dc)
             if not _es_libre(grilla, vecino):
+                continue
+            if not _diagonal_valida(grilla, actual, dr, dc):
                 continue
             nuevo_g = costo_g[actual] + coste
             if nuevo_g < costo_g.get(vecino, float("inf")):
