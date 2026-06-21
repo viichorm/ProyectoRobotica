@@ -1,0 +1,11 @@
+t_s,muestra,modo_decision,pose_fuente,ruta_celdas,waypoints_total,waypoint_indice,distancia_waypoint_m,grid_fila,grid_columna,ps0_frontal_der,ps7_frontal_izq,ps2_lateral_der,ps5_lateral_izq,frontal_crudo,frontal_filtrado,frontal_kalman,kalman_ganancia,kalman_p,encoder_izq_rad,encoder_der_rad,avance_ds_m,velocidad_lineal_m_s,velocidad_angular_rad_s,odom_x_m,odom_y_m,odom_theta_rad,valor_decision,vel_motor_izq_rad_s,vel_motor_der_rad_s,accion,bloqueo_contador
+0.064,1,kalman,supervisor,0,0,-1,,,,63.662,69.984,63.765,66.769,66.823,66.823,66.823,0.0,1.0,0.0,0.0,0.0,0.0,0.0,nan,nan,nan,66.823,3.0,3.0,AVANZAR,1
+0.128,2,kalman,supervisor,0,0,-1,,,,67.792,67.068,71.729,70.236,67.43,67.127,67.312,0.07563,1.66387,0.19468,0.19468,0.003991,0.06236,0.0,nan,nan,nan,67.312,3.0,3.0,AVANZAR,0
+0.192,3,kalman,supervisor,0,0,-1,,,,69.651,65.048,62.721,69.746,67.349,67.201,67.732,0.10071,2.21572,0.38308,0.38308,0.003862,0.06035,0.0,nan,nan,nan,67.732,3.0,3.0,AVANZAR,0
+0.256,4,kalman,supervisor,0,0,-1,,,,62.823,70.805,64.972,63.387,66.814,67.104,68.043,0.12055,2.65216,0.57776,0.57776,0.003991,0.06236,0.0,nan,nan,nan,68.043,3.0,3.0,AVANZAR,0
+0.32,5,kalman,supervisor,0,0,-1,,,,72.76,64.941,63.731,64.206,68.85,67.453,68.553,0.13563,2.98394,0.76616,0.76616,0.003862,0.06035,0.0,nan,nan,nan,68.553,3.0,3.0,AVANZAR,0
+0.384,6,kalman,supervisor,0,0,-1,,,,66.838,59.887,57.399,69.27,63.362,66.761,68.2,0.14676,3.22862,0.96084,0.96084,0.003991,0.06236,0.0,nan,nan,nan,68.2,3.0,3.0,AVANZAR,0
+0.448,7,kalman,supervisor,0,0,-1,,,,67.056,64.992,71.894,67.641,66.024,66.48,68.255,0.15478,3.40509,1.14924,1.14924,0.003862,0.06035,0.0,nan,nan,nan,68.255,3.0,3.0,AVANZAR,0
+0.512,8,kalman,supervisor,0,0,-1,,,,71.162,72.535,67.127,54.668,71.849,67.38,69.233,0.16047,3.5303,1.34392,1.34392,0.003991,0.06236,0.0,nan,nan,nan,69.233,3.0,3.0,AVANZAR,0
+0.576,9,kalman,supervisor,0,0,-1,,,,70.143,68.788,61.354,64.642,69.465,67.91,69.659,0.16446,3.61814,1.53232,1.53232,0.003862,0.06035,0.0,nan,nan,nan,69.659,3.0,3.0,AVANZAR,0
+0.64,10,kalman,supervisor,0,0,-1,,,,63.284,63.746,74.12,70.782,63.515,66.843,69.03,0.16724,3.67925,1.727,1.727,0.003991,0.06236,0.0,nan,nan,nan,69.03,3.0,3.0,AVANZAR,0

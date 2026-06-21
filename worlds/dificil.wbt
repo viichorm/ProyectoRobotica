@@ -1,0 +1,590 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Cardboard.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/DamascusSteel.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.5894009586109625 -0.5849744035150323 -0.5571458132488396 4.1518160035539315
+  position 0.614258873665148 0.6353558436090145 8.606770417715383
+}
+TexturedBackground {
+}
+E-puck {
+  translation -1.21577 -1.13847 -0.0497407
+  rotation 6.72041984768542e-05 -0.00020202099542130647 -0.9999999773355565 -1.485965307179586
+  controller "navegacion"
+  supervisor TRUE
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.05
+  floorSize 2.8 2.8
+}
+Solid {
+  translation -1.34518 -1.25088 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance Cardboard {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(8)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+}
+Solid {
+  translation -1.03878 -1.2484 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance Cardboard {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+}
+Solid {
+  translation 0.63122 0.5116 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance Cardboard {
+      }
+      geometry Box {
+        size 0.1 0.1 0.1
+      }
+    }
+  ]
+  name "solid(26)"
+  boundingObject Box {
+    size 0.1 0.1 0.1
+  }
+}
+Solid {
+  translation -1.34672 -0.9934 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(11)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -1.03672 -0.9934 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(12)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.23672 -0.5934 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(13)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -1.34672 -0.5934 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(14)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.54672 -0.1934 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(15)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -1.09672 -0.433397 0
+  rotation 0 0 1 6.32203e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(16)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.69672 -0.433393 0
+  rotation 0 0 1 6.32203e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(17)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.78672 -0.853393 0
+  rotation 0 0 1 6.32203e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.38672 -0.843393 0
+  rotation 0 0 1 6.32203e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.01328 -0.443393 0
+  rotation 0 0 1 6.32203e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(4)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.20328 0.346607 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(5)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.66024 0.098667 0
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(6)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.41328 -0.443393 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(7)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.35328 0.0966049 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(9)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.90328 0.246612 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(18)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.29672 -0.053395 0
+  rotation 0 0 1 6.32203e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(19)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.103278 -0.0533946 0
+  rotation 0 0 1 1.10149e-05
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(20)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.663274 -0.303393 0
+  rotation 0 0 1 -1.5707853071795865
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(21)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 1.05328 0.496607 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(22)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.503268 0.74661 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(23)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.353268 0.99661 0
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(10)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.603268 1.14661 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(31)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 1.00327 1.14661 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(32)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.19673 1.34661 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(33)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 1.25327 1.19661 0
+  rotation 0 0 -1 1.57079
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(34)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.196732 1.24661 0
+  rotation 0 0 -1 -5.307179586466759e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(25)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.053268 0.59661 0
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(27)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.196733 0.74661 0
+  rotation 0 0 -1 -5.307179586466759e-06
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(28)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation -0.346733 0.99661 0
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(29)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
+Solid {
+  translation 0.90327 0.74661 0
+  rotation 0 0 1 -3.1415853071795863
+  children [
+    Shape {
+      appearance DamascusSteel {
+      }
+      geometry Box {
+        size 0.4 0.1 0.1
+      }
+    }
+  ]
+  name "solid(24)"
+  boundingObject Box {
+    size 0.4 0.1 0.1
+  }
+}
